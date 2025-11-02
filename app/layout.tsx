@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import ThemeToggle from '@/components/theme/ThemeToggle'
 
 export const metadata: Metadata = {
   title: 'AI Bootcamp - Versión Extendida',
@@ -21,18 +23,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
-        {children}
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#363636',
-              color: '#fff',
-            },
-          }}
-        />
+      <body className="antialiased transition-colors duration-300" suppressHydrationWarning>
+        <ThemeProvider>
+          <ThemeToggle />
+          {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#363636',
+                color: '#fff',
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   )
