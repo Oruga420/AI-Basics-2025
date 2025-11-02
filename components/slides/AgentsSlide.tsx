@@ -414,7 +414,7 @@ export default function AgentsSlide({ onComplete, onDownload, completedSections 
               </div>
 
               <div className="card">
-                <h3 className="text-xl font-semibold mb-4 text-green-600">dY>��,? Seleccionar Herramientas</h3>
+                <h3 className="text-xl font-semibold mb-4 text-green-600">Seleccionar Herramientas</h3>
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <Settings className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
