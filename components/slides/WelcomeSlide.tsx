@@ -63,9 +63,9 @@ export default function WelcomeSlide({ onComplete, onDownload, completedSections
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
                 <Brain className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">MCPs</h3>
+              <h3 className="text-xl font-semibold mb-3">MCP: conecta la IA con tus cosas</h3>
               <p className="text-gray-600">
-                Conecta ChatGPT con herramientas externas y automatiza tareas
+                Aprende a conectar ChatGPT o Claude con tus datos y herramientas usando MCP. Asi la IA puede leer, crear y hacer tareas reales.
               </p>
             </div>
 

@@ -29,8 +29,8 @@ export default function ClosingSlide({ onComplete, onDownload, completedSections
       status: completedSections.includes('prompt-stacking')
     },
     {
-      title: "MCPs",
-      description: "Conectaste ChatGPT con herramientas externas",
+      title: "MCP",
+      description: "Conectaste la IA con tus datos y herramientas reales",
       icon: <Rocket className="w-8 h-8 text-green-500" />,
       status: completedSections.includes('mcps')
     },
@@ -182,7 +182,7 @@ export default function ClosingSlide({ onComplete, onDownload, completedSections
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">MCPs para automatización</span>
+                    <span className="text-gray-700">MCP: conectaste la IA a tus datos y herramientas para trabajar con informacion real y ejecutar tareas.</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1 flex-shrink-0" />
