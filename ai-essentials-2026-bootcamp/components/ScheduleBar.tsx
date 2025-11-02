@@ -10,7 +10,7 @@ interface ScheduleBarProps {
 const SLOTS = [
   { time: '0:00 - 0:10', title: 'Bienvenida + Checks técnicos', key: 'welcome' },
   { time: '0:10 - 0:25', title: 'Introducción a la IA', key: 'intro-ai' },
-  { time: '0:25 - 1:25', title: 'Prompt Stacking 101', key: 'prompt-stacking' },
+  { time: '0:25 - 1:25', title: 'Prompt + Context Stacking', key: 'prompt-stacking' },
   { time: '1:25 - 2:25', title: 'MCPs: Qué son y cómo usarlos', key: 'mcps' },
   { time: '2:25 - 3:25', title: 'Agents: Sistemas autónomos', key: 'agents' },
   { time: '3:25 - 3:45', title: 'Vibe Coding', key: 'vibe-coding' },
@@ -22,7 +22,7 @@ export default function ScheduleBar({ currentSlideIndex }: ScheduleBarProps) {
   const slideToSlotIndex: Record<number, number> = {
     0: 0, // Bienvenida
     1: 1, // Introducción a la IA
-    2: 2, // Prompt Stacking
+    2: 2, // Prompt + Context Stacking
     3: 3, // MCPs
     4: 4, // Agents
     5: 5, // Vibe Coding
@@ -72,5 +72,3 @@ export default function ScheduleBar({ currentSlideIndex }: ScheduleBarProps) {
     </div>
   )
 }
-
-

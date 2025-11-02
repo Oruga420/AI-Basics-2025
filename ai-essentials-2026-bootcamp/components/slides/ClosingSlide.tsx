@@ -23,8 +23,8 @@ export default function ClosingSlide({ onComplete, onDownload, completedSections
 
   const achievements = [
     {
-      title: "Prompt Stacking",
-      description: "Aprendiste a encadenar prompts para resultados complejos",
+      title: "Prompt + Context Stacking",
+      description: "Diseñaste cadenas de prompts con contexto apilado y específico",
       icon: <Target className="w-8 h-8 text-blue-500" />,
       status: completedSections.includes('prompt-stacking')
     },
@@ -178,7 +178,7 @@ export default function ClosingSlide({ onComplete, onDownload, completedSections
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Prompt Stacking para flujos complejos</span>
+                    <span className="text-gray-700">Prompt + Context Stacking: diseñaste cadenas de pasos con un contexto apilado y específico para producir resultados repetibles y auditables.</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1 flex-shrink-0" />

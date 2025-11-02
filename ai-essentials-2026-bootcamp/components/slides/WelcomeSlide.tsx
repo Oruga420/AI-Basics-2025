@@ -53,9 +53,9 @@ export default function WelcomeSlide({ onComplete, onDownload, completedSections
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
                 <Zap className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Prompt Stacking</h3>
+              <h3 className="text-xl font-semibold mb-3">Prompt + Context Stacking</h3>
               <p className="text-gray-600">
-                Encadena prompts para lograr resultados complejos y consistentes
+                Encadená pasos y apilá un contexto específico en la ventana del LLM para hacer prompt steering y obtener resultados consistentes y ultra relevantes.
               </p>
             </div>
 

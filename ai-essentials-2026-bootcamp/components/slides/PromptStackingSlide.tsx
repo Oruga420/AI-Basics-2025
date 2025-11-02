@@ -1,13 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  CheckCircle, 
-  ArrowRight,
-  Target,
-  Zap,
-  RefreshCw
-} from 'lucide-react'
+import { CheckCircle, ArrowRight, Layers, Target, GitBranch, Sparkles } from 'lucide-react'
 
 interface PromptStackingSlideProps {
   onComplete: (sectionId: string) => void
@@ -15,252 +9,271 @@ interface PromptStackingSlideProps {
   completedSections: string[]
 }
 
+const whyItWorks = [
+  'El LLM responde a patrones activados por el lenguaje en contexto.',
+  'Si el lenguaje es genérico, la respuesta se mantiene amplia.',
+  'Si el lenguaje es de nicho, el modelo se enfoca y aumenta la precisión.',
+  'Apilar contexto reduce ruido y alucinaciones.'
+]
+
+const workflowSteps = [
+  { title: 'Tema madre', description: 'Pedí un mapa de conceptos básicos del dominio.' },
+  { title: 'Selección', description: 'Quedate con los conceptos que alinean con tu objetivo.' },
+  { title: 'Silos', description: 'Convertí cada concepto en un stack con la profundidad que quieras.' },
+  { title: 'Drill down', description: 'Profundizá algunos silos y mantené otros en modo superficial.' },
+  { title: 'Apilado progresivo', description: 'Todo lo generado alimenta la ventana y estrecha el nicho.' },
+  { title: 'Prompt final', description: 'Con el modelo ya enfocado, pedí el output que necesitás.' }
+]
+
+const differences = [
+  {
+    title: 'Prompt Chaining',
+    description: 'La salida de A dispara la ejecución de B. Hay dependencia operativa entre pasos.'
+  },
+  {
+    title: 'Context Stacking',
+    description: 'La salida de A alimenta el contexto para que B trabaje más enfocado. Es afinación semántica, no dependencia operativa.'
+  }
+]
+
+const exampleFlow = [
+  { label: 'Tema madre', detail: 'Fotografía → pedís conceptos básicos.' },
+  { label: 'Selección', detail: 'Cámaras, lentes, equipo, mantenimiento.' },
+  { label: 'Stacks', detail: 'En lentes podés ir a 8 mm, marca X, casos de uso; mantenimiento solo necesita una capa breve.' },
+  { label: 'Resultado', detail: 'El modelo opera como si estuviera en un thread “lentes 8 mm”, no en “fotografía” genérica.' }
+]
+
+const heuristics = [
+  'Usá vocabulario de nicho.',
+  'Definí la profundidad de cada silo según objetivo y presupuesto de tokens.',
+  'No mezcles muchos objetivos en un mismo stack.',
+  'Combiná silos recién cuando cada uno esté afinado.',
+  'Si falta espacio, priorizá lo más específico y útil para el prompt final.'
+]
+
+const stackSheet = [
+  'Rol: …',
+  'Objetivo: …',
+  'Vocabulario de nicho: …',
+  'Datos permitidos o referencias: …',
+  'Formato de salida esperado: JSON, tabla o bullets con campos obligatorios.',
+  'Ejemplos y contra ejemplos: …',
+  'Criterios de calidad: claridad, factualidad, tono, utilidad.',
+  'Notas de memoria: decisiones previas, IDs de versión.'
+]
+
 export default function PromptStackingSlide({ onComplete, onDownload, completedSections }: PromptStackingSlideProps) {
   const isCompleted = completedSections.includes('prompt-stacking')
 
-  const concepts = [
-    {
-      title: "¿Qué es Prompt Stacking?",
-      description: "Encadenar múltiples prompts para lograr resultados complejos y consistentes",
-      icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      details: [
-        "Cada prompt tiene un propósito específico",
-        "Los resultados se alimentan al siguiente prompt",
-        "Permite crear flujos de trabajo automatizados",
-        "Mejora la calidad y consistencia de los resultados"
-      ]
-    },
-    {
-      title: "Estructura Básica",
-      description: "3 pasos fundamentales para cualquier stack de prompts",
-      icon: <Target className="w-8 h-8 text-blue-500" />,
-      details: [
-        "1. Definición del rol y objetivo",
-        "2. Generación del resultado base", 
-        "3. Refinamiento o evaluación automática"
-      ]
-    },
-    {
-      title: "Tipos de Stacking",
-      description: "Diferentes formas de encadenar prompts según tu necesidad",
-      icon: <RefreshCw className="w-8 h-8 text-green-500" />,
-      details: [
-        "Lineal: A → B → C",
-        "Condicional: Si X entonces Y, sino Z",
-        "Recurrente: Repetir hasta cumplir criterio"
-      ]
+  const handleMarkComplete = () => {
+    if (!isCompleted) {
+      onComplete('prompt-stacking')
     }
-  ]
-
-  const exampleFlow = [
-    {
-      step: 1,
-      title: "Estratega de Marketing",
-      prompt: "Eres un estratega de marketing. Define público objetivo y tono para un restaurante saludable en CDMX.",
-      result: "Público: Profesionales 25-40 años, tono: fresco y confiable"
-    },
-    {
-      step: 2,
-      title: "Copywriter",
-      prompt: "Con base en la respuesta anterior, genera 3 copies publicitarios.",
-      result: "3 opciones de copy enfocadas en frescura y salud"
-    },
-    {
-      step: 3,
-      title: "Evaluador",
-      prompt: "Evalúa los 3 copies y devuelve solo el más persuasivo.",
-      result: "El copy más efectivo con justificación"
-    }
-  ]
-
+  }
 
   return (
     <div className="slide-container">
       <div className="slide-content">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="slide-title">
-            🔗 Prompt Stacking 101
-          </h1>
+          <h1 className="slide-title">Prompt + Context Stacking</h1>
           <p className="slide-subtitle text-primary-600">
-            Encadena prompts como un profesional
+            Menos caos, más control: pasos claros y un contexto específico que guía al modelo hacia el nicho correcto.
           </p>
         </motion.div>
 
-        {/* Concepts Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="section-title text-center mb-12">Conceptos Fundamentales</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {concepts.map((concept, index) => (
+          <div className="card">
+            <h2 className="section-title mb-6 text-left">Definición</h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Context Stacking es la teoría de utilizar los tokens de la ventana de conversación del LLM para hacer prompt
+              steering usando las palabras adecuadas que activan los vectores correctos dentro de la data de entrenamiento.
+              La idea es apilar contexto relevante y progresivo para que, cuando pidas el resultado final, el modelo ya esté
+              sintonizado en el subespacio semántico correcto.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Por qué funciona</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="card">
+              <ul className="space-y-3">
+                {whyItWorks.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-primary-500 mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Workflow paso a paso</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {workflowSteps.map((step, index) => (
               <motion.div
-                key={index}
+                key={step.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
-                className="card group hover:shadow-2xl transition-all duration-300"
+                transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                className="card"
               >
-                <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    {concept.icon}
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center font-semibold">
+                    {index + 1}
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{concept.title}</h3>
-                  <p className="text-gray-600 mb-4">{concept.description}</p>
+                  <h3 className="text-lg font-semibold">{step.title}</h3>
                 </div>
-                
-                <ul className="space-y-2">
-                  {concept.details.map((detail, detailIndex) => (
-                    <li key={detailIndex} className="flex items-start">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-sm text-gray-700">{detail}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-gray-700">{step.description}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Example Flow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mb-16"
         >
-          <h2 className="section-title text-center mb-8">Ejemplo Práctico: Campaña de Restaurante</h2>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-6">
-              {exampleFlow.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 1.0 + index * 0.2 }}
-                  className="relative"
-                >
-                  <div className="card">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-semibold text-sm flex-shrink-0">
-                        {step.step}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold mb-3 text-primary-600">
-                          {step.title}
-                        </h3>
-                        <div className="bg-gray-50 rounded-lg p-4 mb-3">
-                          <p className="text-sm text-gray-700 font-mono">
-                            "{step.prompt}"
-                          </p>
-                        </div>
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                          <p className="text-sm text-green-800">
-                            <strong>Resultado:</strong> {step.result}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {index < exampleFlow.length - 1 && (
-                    <div className="flex justify-center my-4">
-                      <ArrowRight className="w-6 h-6 text-gray-400" />
-                    </div>
+          <h2 className="section-title text-center mb-8">Diferencia con Prompt Chaining</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {differences.map((item, index) => (
+              <div key={item.title} className="card">
+                <div className="flex items-center space-x-3 mb-4">
+                  {index === 0 ? (
+                    <GitBranch className="w-6 h-6 text-blue-500" />
+                  ) : (
+                    <Layers className="w-6 h-6 text-purple-500" />
                   )}
-                </motion.div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                </div>
+                <p className="text-gray-700">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Ejemplo rápido: fotografía</h2>
+          <div className="max-w-3xl mx-auto">
+            <div className="card space-y-4">
+              {exampleFlow.map((item, index) => (
+                <div key={item.label} className="flex items-start space-x-3">
+                  <ArrowRight className="w-5 h-5 text-primary-500 mt-1 flex-shrink-0" />
+                  <p className="text-gray-700">
+                    <strong>{item.label}:</strong> {item.detail}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </motion.div>
 
-        {/* Best Practices */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Multi silo y combinación</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="card flex items-start space-x-4">
+              <Sparkles className="w-8 h-8 text-primary-500 flex-shrink-0 mt-1" />
+              <p className="text-gray-700 leading-relaxed">
+                Primero afiná cada silo por separado. Después combiná silos —por ejemplo, lentes 8 mm con modelaje— para
+                obtener poses, distancias y parámetros para un caso concreto. La combinación funciona mejor cuando cada silo
+                ya tiene vocabulario y decisiones propias.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.4 }}
           className="mb-16"
         >
-          <h2 className="section-title text-center mb-8">Mejores Prácticas</h2>
-          
+          <h2 className="section-title text-center mb-8">Heurísticas prácticas</h2>
           <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="card">
-                <h3 className="text-xl font-semibold mb-4 text-green-600">✅ Haz esto</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Sé específico en cada prompt</span>
+            <div className="card">
+              <ul className="space-y-3">
+                {heuristics.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <Target className="w-5 h-5 text-primary-500 mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">{item}</span>
                   </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Define criterios claros de evaluación</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Incluye contexto relevante</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Establece límites y restricciones</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Pide justificaciones para decisiones</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="card">
-                <h3 className="text-xl font-semibold mb-4 text-red-600">❌ Evita esto</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                      <span className="text-red-600 text-sm">✗</span>
-                    </div>
-                    <span className="text-gray-700">Prompts demasiado vagos</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                      <span className="text-red-600 text-sm">✗</span>
-                    </div>
-                    <span className="text-gray-700">Falta de criterios de evaluación</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                      <span className="text-red-600 text-sm">✗</span>
-                    </div>
-                    <span className="text-gray-700">No incluir contexto suficiente</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                      <span className="text-red-600 text-sm">✗</span>
-                    </div>
-                    <span className="text-gray-700">Saltarse pasos del proceso</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                      <span className="text-red-600 text-sm">✗</span>
-                    </div>
-                    <span className="text-gray-700">No validar resultados</span>
-                  </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
             </div>
           </div>
         </motion.div>
 
-        {/* Action buttons removed for presentation mode */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.6 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Plantilla rápida: Stack Sheet</h2>
+          <div className="max-w-3xl mx-auto">
+            <div className="card">
+              <ul className="space-y-3">
+                {stackSheet.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-primary-500 mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
+          className="text-center"
+        >
+          <button
+            onClick={handleMarkComplete}
+            className={`btn-primary inline-flex items-center space-x-2 ${
+              isCompleted ? 'opacity-50 cursor-default' : ''
+            }`}
+            aria-disabled={isCompleted}
+          >
+            <span>{isCompleted ? 'Sección completada' : 'Marcar como completada'}</span>
+          </button>
+        </motion.div>
       </div>
     </div>
   )

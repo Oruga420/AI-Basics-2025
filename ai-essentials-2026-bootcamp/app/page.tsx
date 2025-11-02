@@ -26,7 +26,7 @@ import ScheduleBar from '@/components/ScheduleBar'
 const slides = [
   { id: 'welcome', component: WelcomeSlide, title: 'Bienvenida' },
   { id: 'intro-ai', component: IntroAISlide, title: 'Introducción a la IA' },
-  { id: 'prompt-stacking', component: PromptStackingSlide, title: 'Prompt Stacking' },
+  { id: 'prompt-stacking', component: PromptStackingSlide, title: 'Prompt + Context Stacking' },
   { id: 'mcps', component: MCPSlide, title: 'MCPs' },
   { id: 'agents', component: AgentsSlide, title: 'Agents' },
   { id: 'vibe-coding', component: VibeCodingSlide, title: 'Vibe Coding' },
