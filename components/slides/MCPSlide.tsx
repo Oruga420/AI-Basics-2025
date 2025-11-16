@@ -265,6 +265,33 @@ export default function MCPSlide({ onComplete, onDownload: _onDownload, complete
           </div>
         </motion.div>
 
+        {/* Video */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Video: MCP en acciA3n</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="card overflow-hidden">
+              <div className="aspect-video w-full rounded-2xl overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/qZvhcsx1uQU?si=Q4GpknnALjj8SeIF"
+                  title="MCP overview"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                IntroducciA3n rA�pida a los flujos MCP y cA3mo conectarlos desde Zapier y tus propios servers.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Real Use Cases */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

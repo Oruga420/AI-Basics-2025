@@ -89,6 +89,32 @@ export default function PromptStackingSlide({ onComplete, onDownload, completedS
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Video: Context Stacking en acciA3n</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="card overflow-hidden">
+              <div className="aspect-video w-full rounded-2xl overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/GnoQyHmauvg?si=W3CgA73jqXYwMfG8"
+                  title="Context Stacking"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                Recorrido guiado del flujo de Prompt + Context Stacking aplicado paso a paso.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >

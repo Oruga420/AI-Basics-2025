@@ -520,6 +520,32 @@ export default function AgentsSlide({ onComplete, onDownload: _onDownload, compl
                 <p className="text-gray-700 mt-2">{card.tail}</p>
               </div>
             ))}
+         </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Video: Agents en acciA3n</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="card overflow-hidden">
+              <div className="aspect-video w-full rounded-2xl overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/KsdMp1BwG4M?si=M0KdjTRTWHRiL-KN"
+                  title="Agents demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                ExplicaciA3n visual de cA3mo orquestar un agente con herramientas, memoria y MCP servers.
+              </p>
+            </div>
           </div>
         </motion.div>
 
@@ -546,7 +572,7 @@ export default function AgentsSlide({ onComplete, onDownload: _onDownload, compl
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
           className="text-center space-y-4"
         >
           <p className="text-gray-700 text-lg">

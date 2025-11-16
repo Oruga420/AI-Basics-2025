@@ -206,6 +206,32 @@ export default function VibeCodingSlide({ onComplete, onDownload: _onDownload, c
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="mb-16"
+        >
+          <h2 className="section-title text-center mb-8">Video: Vibe Coding en acciA3n</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="card overflow-hidden">
+              <div className="aspect-video w-full rounded-2xl overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/Ay3fJNekick?si=Ds4oUU0wRWeQR8Wi"
+                  title="Vibe Coding demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                Ejemplo real de cA3mo pasar de una idea a una app funcional usando Vibe Coding.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-16"
         >
@@ -385,7 +411,7 @@ export default function VibeCodingSlide({ onComplete, onDownload: _onDownload, c
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
           className="mb-16 space-y-8"
         >
           <h2 className="section-title text-center mb-8">Vibe Coding: recursos rápidos</h2>
